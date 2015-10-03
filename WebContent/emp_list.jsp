@@ -1,12 +1,14 @@
+<%@page import="com.bhuwan.web.jsp.model.Employee"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@page session="false"%>
+<jsp:useBean id="empList" type="java.util.ArrayList<Employee>"
+	scope="request" beanName="com.bhuwan.web.jsp.model.Employee" />
 <!DOCTYPE html>
 <!-- https://shapebootstrap.net/item/1524915-adminlte-dashboard-and-control-panel -->
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Dashboard</title>
+<title>Employee List</title>
 <meta
 	content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no'
 	name='viewport'>
@@ -41,11 +43,10 @@
         <![endif]-->
 </head>
 <body class="skin-blue">
-
 	<!-- header logo: style can be found in header.less -->
 	<header class="header">
 		<a href="dashboard.jsp" class="logo"> <!-- Add the class icon to your logo image or logo icon to add the margining -->
-			Employee Management
+			AdminLTE
 		</a>
 		<!-- Header Navbar: style can be found in header.less -->
 		<nav class="navbar navbar-static-top" role="navigation">
@@ -60,7 +61,7 @@
 					<!-- User Account: style can be found in dropdown.less -->
 					<li class="dropdown user user-menu"><a href="#"
 						class="dropdown-toggle" data-toggle="dropdown"> <i
-							class="glyphicon glyphicon-user"></i> <span>${emp.fullname}<i
+							class="glyphicon glyphicon-user"></i> <span>Jane Doe <i
 								class="caret"></i></span>
 					</a>
 						<ul class="dropdown-menu">
@@ -68,8 +69,7 @@
 							<li class="user-header bg-light-blue"><img
 								src="img/avatar3.png" class="img-circle" alt="User Image" />
 								<p>
-									${emp.fullname} - Java Developer <small>Member since
-										Dec 2011</small>
+									Jane Doe - Web Developer <small>Member since Nov. 2012</small>
 								</p></li>
 							<!-- Menu Body -->
 							<li class="user-body">
@@ -89,10 +89,7 @@
 									<a href="#" class="btn btn-default btn-flat">Profile</a>
 								</div>
 								<div class="pull-right">
-									<form action="<%=response.encodeURL("logout")%>" method="post">
-										<input type="submit" class="btn btn-default btn-flat"
-											value="Sign out" />
-									</form>
+									<a href="logout" class="btn btn-default btn-flat">Sign out</a>
 								</div>
 							</li>
 						</ul></li>
@@ -111,7 +108,7 @@
 						<img src="img/avatar3.png" class="img-circle" alt="User Image" />
 					</div>
 					<div class="pull-left info">
-						<p>${emp.fullname}</p>
+						<p>Hello, Jane</p>
 
 						<a href="#"><i class="fa fa-circle text-success"></i> Online</a>
 					</div>
@@ -131,8 +128,12 @@
 				<!-- /.search form -->
 				<!-- sidebar menu: : style can be found in sidebar.less -->
 				<ul class="sidebar-menu">
-					<li class="treeview"><a href="#"> <i class="fa fa-table"></i>
-							<span>Employee</span> <i class="fa fa-angle-left pull-right"></i>
+					<li><a href="dashboard.jsp"> <i class="fa fa-dashboard"></i>
+							<span>Dashboard</span>
+					</a></li>
+					<li class="treeview active"><a href="#"> <i
+							class="fa fa-table"></i> <span>Tables</span> <i
+							class="fa fa-angle-left pull-right"></i>
 					</a>
 						<ul class="treeview-menu">
 							<li><a href="employee"><i
@@ -149,43 +150,57 @@
 		<aside class="right-side">
 			<!-- Content Header (Page header) -->
 			<section class="content-header">
-				<h1>Dashboard</h1>
+				<h1>Employee List</h1>
 				<ol class="breadcrumb">
 					<li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-					<li class="active">Dashboard</li>
+					<li class="active">Employee List</li>
 				</ol>
 			</section>
 
 			<!-- Main content -->
 			<section class="content">
-
-				<!-- Small boxes (Stat box) -->
-				<div class="row"></div>
-				<!-- /.row -->
-
-				<!-- top row -->
 				<div class="row">
-					<div class="col-xs-12 connectedSortable"></div>
-					<!-- /.col -->
+					<div class="col-xs-12">
+						<div class="box">
+							<!-- /.box-header -->
+							<div class="box-body table-responsive">
+								<table id="example1" class="table table-bordered table-striped">
+									<thead>
+										<tr>
+											<th>Full Name</th>
+											<th>Username</th>
+											<th>Password</th>
+											<th>Address</th>
+											<th>Department</th>
+											<th>Role</th>
+											<th>Terminated ?</th>
+										</tr>
+									</thead>
+									<tbody>
+
+										<%
+										    for (int i = 0; i < empList.size(); i++) {
+										%>
+										<tr>
+											<td><%=empList.get(i).getFullname()%></td>
+											<td><%=empList.get(i).getUsername()%></td>
+											<td><%=empList.get(i).getPassword()%></td>
+											<td><%=empList.get(i).getAddress()%></td>
+											<td><%=empList.get(i).getDepartment()%></td>
+											<td><%=empList.get(i).getRole()%></td>
+											<td><%=empList.get(i).isTerminated()%></td>
+										</tr>
+										<%
+										    }
+										%>
+									</tbody>
+								</table>
+							</div>
+							<!-- /.box-body -->
+						</div>
+						<!-- /.box -->
+					</div>
 				</div>
-				<!-- /.row -->
-
-				<!-- Main row -->
-				<div class="row">
-					<!-- Left col -->
-					<section class="col-lg-6 connectedSortable">
-						<!-- Box (with bar chart) -->
-
-					</section>
-					<!-- /.Left col -->
-					<!-- right col (We are only adding the ID to make the widgets sortable)-->
-					<section class="col-lg-6 connectedSortable">
-						<!-- Map box -->
-
-					</section>
-					<!-- right col -->
-				</div>
-				<!-- /.row (main row) -->
 
 			</section>
 			<!-- /.content -->
@@ -193,8 +208,6 @@
 		<!-- /.right-side -->
 	</div>
 	<!-- ./wrapper -->
-
-	<!-- add new calendar event modal -->
 
 
 	<!-- jQuery 2.0.2 -->
@@ -237,6 +250,21 @@
 
 	<!-- AdminLTE dashboard demo (This is only for demo purposes) -->
 	<script src="js/AdminLTE/dashboard.js" type="text/javascript"></script>
+
+	<!-- page script -->
+	<script type="text/javascript">
+        $(function () {
+            $("#example1").dataTable();
+            $('#example2').dataTable({
+                "bPaginate" : true,
+                "bLengthChange" : false,
+                "bFilter" : false,
+                "bSort" : true,
+                "bInfo" : true,
+                "bAutoWidth" : false
+            });
+        });
+    </script>
 
 </body>
 </html>
