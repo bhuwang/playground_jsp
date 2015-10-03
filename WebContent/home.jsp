@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@page session="false"%>
 <!DOCTYPE html>
 <!-- https://shapebootstrap.net/item/1524915-adminlte-dashboard-and-control-panel -->
 <html>
@@ -60,7 +59,7 @@
 					<!-- User Account: style can be found in dropdown.less -->
 					<li class="dropdown user user-menu"><a href="#"
 						class="dropdown-toggle" data-toggle="dropdown"> <i
-							class="glyphicon glyphicon-user"></i> <span>${emp.fullname}<i
+							class="glyphicon glyphicon-user"></i> <span>${sessionScope.user}<i
 								class="caret"></i></span>
 					</a>
 						<ul class="dropdown-menu">
@@ -68,8 +67,8 @@
 							<li class="user-header bg-light-blue"><img
 								src="img/avatar3.png" class="img-circle" alt="User Image" />
 								<p>
-									${emp.fullname} - Java Developer <small>Member since
-										Dec 2011</small>
+									${sessionScope.user} - Java Developer <small>Member
+										since Dec 2011</small>
 								</p></li>
 							<!-- Menu Body -->
 							<li class="user-body">
@@ -111,7 +110,7 @@
 						<img src="img/avatar3.png" class="img-circle" alt="User Image" />
 					</div>
 					<div class="pull-left info">
-						<p>${emp.fullname}</p>
+						<p>${sessionScope.user}</p>
 
 						<a href="#"><i class="fa fa-circle text-success"></i> Online</a>
 					</div>
@@ -139,6 +138,8 @@
 									class="fa fa-angle-double-right"></i> Employee List</a></li>
 							<li class="active"><a href="add.jsp"><i
 									class="fa fa-angle-double-right"></i> Add New Employee</a></li>
+							<li class="active"><a href="el"><i
+									class="fa fa-angle-double-right"></i> Expression Language</a></li>
 						</ul></li>
 				</ul>
 			</section>

@@ -75,7 +75,7 @@ public class LoginServlet extends HttpServlet {
                     session.setAttribute("user", emp.getFullname());
                     // setting session to expiry in 30 mins
                     session.setMaxInactiveInterval(30 * 60);
-                    Cookie userName = new Cookie("user", emp.getFullname());
+                    Cookie userName = new Cookie("user.cookie", emp.getFullname());
                     userName.setMaxAge(30 * 60);
                     response.addCookie(userName);
                     // Session Management using HttpSession - END
@@ -84,9 +84,6 @@ public class LoginServlet extends HttpServlet {
                     // Get the encoded URL string
                     LOGGER.debug("session.getAttribute('user'):: {}", session.getAttribute("user"));
                     String encodedURL = response.encodeRedirectURL("home.jsp");
-                    
-                    // set employee object in request
-                    request.setAttribute("emp", emp);
                     
                     request.getRequestDispatcher(encodedURL).forward(request, response);
                     // Session Management using URL Rewriting - END

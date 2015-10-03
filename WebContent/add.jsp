@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>EL Page</title>
+<title>Add Employee</title>
 <meta
 	content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no'
 	name='viewport'>
@@ -31,7 +31,7 @@
 	<!-- header logo: style can be found in header.less -->
 	<header class="header">
 		<a href="dashboard.html" class="logo"> <!-- Add the class icon to your logo image or logo icon to add the margining -->
-			Employee Management
+			AdminLTE
 		</a>
 		<!-- Header Navbar: style can be found in header.less -->
 		<nav class="navbar navbar-static-top" role="navigation">
@@ -125,7 +125,7 @@
 						<ul class="treeview-menu">
 							<li><a href="employee"><i
 									class="fa fa-angle-double-right"></i> Employee List</a></li>
-							<li class="active"><a href="add.jsp"><i
+							<li class="active"><a href="add.html"><i
 									class="fa fa-angle-double-right"></i> Add New Employee</a></li>
 							<li class="active"><a href="el"><i
 									class="fa fa-angle-double-right"></i> Expression Language</a></li>
@@ -139,11 +139,11 @@
 		<aside class="right-side">
 			<!-- Content Header (Page header) -->
 			<section class="content-header">
-				<h1>Expression Language Demonstration</h1>
+				<h1>Add New Employee</h1>
 				<ol class="breadcrumb">
 					<li><a href="#"> <i class="fa fa-dashboard"></i> Home
 					</a></li>
-					<li class="active">Expression Language</li>
+					<li class="active">Add New Employee</li>
 				</ol>
 			</section>
 
@@ -154,29 +154,49 @@
 						<!-- general form elements -->
 						<div class="box box-primary">
 							<!-- /.box-header -->
-							<h3>Request Scope:</h3>
+							<!-- form start -->
+							<form role="form" action="employee" method="post">
+								<div class="box-body">
+									<div class="form-group">
+										<label>Username</label> <input type="text"
+											class="form-control" placeholder="Enter Username"
+											name="username" required="required" />
+									</div>
+									<div class="form-group">
+										<label>Password</label> <input type="password"
+											class="form-control" placeholder="Enter Password"
+											name="password" required="required" />
+									</div>
+									<div class="form-group">
+										<label>Full Name</label> <input type="text"
+											class="form-control" placeholder="Enter Fullname"
+											name="fullname" required="required" />
+									</div>
+									<div class="form-group">
+										<label>Address</label> <input type="text" class="form-control"
+											placeholder="Enter Address" name="address"
+											required="required" />
+									</div>
+									<div class="form-group">
+										<label>Department</label> <input type="text"
+											class="form-control" placeholder="Enter Department"
+											name="department" required="required" />
+									</div>
+									<!-- select -->
+									<div class="form-group">
+										<label>Select</label> <select class="form-control" name="role"
+											required="required">
+											<option value="admin">Admin</option>
+											<option value="user">User</option>
+										</select>
+									</div>
+								</div>
+								<!-- /.box-body -->
 
-							<p>Person Object: ${person}</p>
-							<p>Person Object using requestScope: ${requestScope.person}</p>
-							<p>Person Name using . operator: ${person.name}</p>
-							<p>Person Name using []: ${person["name"]}</p>
-
-							<h3>Application Scope:</h3>
-							<p>Person.Cookie: ${applicationScope["Person.Cookie"]}</p>
-
-							<h3>Session Scope:</h3>
-							<p>Employee using []: ${sessionScope["employee"]}</p>
-							<p>Employee using [] get address:
-								${sessionScope["employee"]["address"]["address"]}</p>
-							<p>Employee using . operator: ${sessionScope.employee}</p>
-							<p>Employee using . operator get address:
-								${sessionScope.employee.address.address}</p>
-
-							<h3>Using Cookie:</h3>
-							<p>Person.Cookie: ${cookie["Person.Cookie"].value}</p>
-
-							<h3>Using initParam:</h3>
-							<p>system.user: ${initParam["system.user"]}</p>
+								<div class="box-footer">
+									<button type="submit" class="btn btn-primary">Submit</button>
+								</div>
+							</form>
 						</div>
 						<!-- /.box -->
 					</div>
